@@ -1,83 +1,92 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Merry Christmas My Love ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Merry Christmas My Love</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
 body{
-  font-family:'Poppins',sans-serif;
-  background:linear-gradient(135deg,#ff416c,#ff4b2b);
-  color:white;
+  background: linear-gradient(135deg,#ff4b6e,#ff6a88);
   height:100vh;
   overflow:hidden;
 }
 
 .page{
-  display:none;
-  height:100vh;
+  position:absolute;
+  top:0;
+  left:0;
   width:100%;
-  justify-content:center;
+  height:100%;
+  display:flex;
   align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  color:#fff;
   text-align:center;
-  padding:30px;
+  padding:20px;
+  transition:0.8s;
 }
 
-.page.active{
-  display:flex;
-  animation:fade 1s ease;
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:scale(1.1);
 }
 
 .card{
-  background:rgba(255,255,255,0.15);
-  backdrop-filter:blur(12px);
-  padding:35px;
-  border-radius:25px;
-  max-width:380px;
+  background:rgba(255,255,255,0.2);
+  padding:30px;
+  border-radius:20px;
+  backdrop-filter: blur(10px);
+  animation: pop 1s ease;
 }
 
-h1{font-size:32px;margin-bottom:10px;}
-h2{font-size:26px;margin-bottom:10px;}
-p{font-size:16px;margin-bottom:20px;}
+@keyframes pop{
+  from{transform:scale(0.5); opacity:0;}
+  to{transform:scale(1); opacity:1;}
+}
 
-button{
+h1{
+  font-size:32px;
+  margin-bottom:15px;
+}
+
+p{
+  font-size:18px;
+  margin:10px 0;
+}
+
+.btn{
+  margin-top:20px;
   padding:14px 30px;
-  font-size:16px;
   border:none;
   border-radius:30px;
+  font-size:16px;
+  background:#fff;
+  color:#ff4b6e;
   cursor:pointer;
-  background:white;
-  color:#ff416c;
-  transition:0.3s;
+  font-weight:bold;
 }
-button:hover{transform:scale(1.1);}
 
 .heart{
-  font-size:50px;
-  animation:beat 1s infinite;
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation: float 6s linear infinite;
+  opacity:0.8;
 }
 
-@keyframes fade{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;transform:translateY(0);}
-}
-
-@keyframes beat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.3);}
-}
-
-.snow{
-  position:fixed;
-  top:-10px;
-  color:white;
-  animation:fall linear infinite;
-}
-@keyframes fall{
-  to{transform:translateY(110vh);}
+@keyframes float{
+  0%{transform:translateY(0); opacity:1;}
+  100%{transform:translateY(-110vh); opacity:0;}
 }
 </style>
 </head>
@@ -85,56 +94,51 @@ button:hover{transform:scale(1.1);}
 <body>
 
 <!-- PAGE 1 -->
-<div class="page active" id="page1">
+<div class="page" id="page1">
   <div class="card">
     <h1>🎄 Merry Christmas 🎄</h1>
-    <p>Someone special has something for you…</p>
-    <button onclick="nextPage(2)">Tap to Continue 🎁</button>
+    <p>My Love ❤️</p>
+    <button class="btn" onclick="goPage(2)">Tap to Surprise 🎁</button>
   </div>
 </div>
 
 <!-- PAGE 2 -->
-<div class="page" id="page2">
+<div class="page hidden" id="page2">
   <div class="card">
-    <h2>💖 A Small Message</h2>
-    <p>
-      Every smile of yours,<br>
-      every moment with you,<br>
-      is my favorite memory.
-    </p>
-    <button onclick="nextPage(3)">One Last Surprise ❤️</button>
+    <h1>Shilpa ❤️ Bishal</h1>
+    <p>You are my favorite miracle 💫</p>
+    <p>Every Christmas feels magical because of you 🎄</p>
+    <button class="btn" onclick="goPage(3)">Next Surprise 💖</button>
   </div>
 </div>
 
 <!-- PAGE 3 -->
-<div class="page" id="page3">
+<div class="page hidden" id="page3">
   <div class="card">
-    <div class="heart">❤️</div>
-    <h2>Shilpa ❤️ Bishal</h2>
-    <p>
-      You are my today,<br>
-      my tomorrow,<br>
-      my forever Christmas 🎄
-    </p>
+    <h1>Forever & Always ♾️</h1>
+    <p>I promise to love you</p>
+    <p>Not only on Christmas</p>
+    <p>But every single day ❤️</p>
+    <p style="margin-top:15px;">— Bishal</p>
   </div>
 </div>
 
 <script>
-function nextPage(n){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page'+n).classList.add('active');
+function goPage(num){
+  document.querySelectorAll('.page').forEach(p=>p.classList.add('hidden'));
+  document.getElementById('page'+num).classList.remove('hidden');
 }
 
-// Snowfall
-for(let i=0;i<30;i++){
-  let snow=document.createElement("div");
-  snow.className="snow";
-  snow.innerHTML="❄";
-  snow.style.left=Math.random()*100+"vw";
-  snow.style.animationDuration=3+Math.random()*5+"s";
-  snow.style.fontSize=10+Math.random()*20+"px";
-  document.body.appendChild(snow);
-}
+// Floating hearts
+setInterval(()=>{
+  let heart=document.createElement('div');
+  heart.className='heart';
+  heart.innerHTML='❤️';
+  heart.style.left=Math.random()*100+'vw';
+  heart.style.fontSize=(15+Math.random()*20)+'px';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},500);
 </script>
 
 </body>
