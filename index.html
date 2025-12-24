@@ -1,70 +1,63 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Merry Christmas ❤️</title>
+<title>Merry Christmas My Love ❤️</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;}
 body{
-  margin:0;
+  font-family:'Poppins',sans-serif;
+  background:linear-gradient(135deg,#ff416c,#ff4b2b);
+  color:white;
   height:100vh;
-  display:flex;
+  overflow:hidden;
+}
+
+.page{
+  display:none;
+  height:100vh;
+  width:100%;
   justify-content:center;
   align-items:center;
-  background:linear-gradient(135deg,#ff416c,#ff4b2b);
-  font-family:'Poppins',sans-serif;
-  color:white;
+  text-align:center;
+  padding:30px;
+}
+
+.page.active{
+  display:flex;
+  animation:fade 1s ease;
 }
 
 .card{
   background:rgba(255,255,255,0.15);
   backdrop-filter:blur(12px);
-  padding:35px 25px;
-  border-radius:22px;
-  text-align:center;
-  animation:pop 1s ease;
+  padding:35px;
+  border-radius:25px;
+  max-width:380px;
 }
 
-h1{
-  font-size:34px;
-  margin-bottom:10px;
-}
-
-.heart{
-  font-size:42px;
-  animation:beat 1s infinite;
-}
+h1{font-size:32px;margin-bottom:10px;}
+h2{font-size:26px;margin-bottom:10px;}
+p{font-size:16px;margin-bottom:20px;}
 
 button{
-  margin-top:20px;
   padding:14px 30px;
   font-size:16px;
   border:none;
   border-radius:30px;
+  cursor:pointer;
   background:white;
   color:#ff416c;
-  cursor:pointer;
   transition:0.3s;
 }
+button:hover{transform:scale(1.1);}
 
-button:hover{
-  transform:scale(1.08);
-}
-
-#surprise{
-  display:none;
-  margin-top:25px;
-  animation:fade 1s ease;
-}
-
-#surprise h2{
-  font-size:26px;
-}
-
-@keyframes pop{
-  from{transform:scale(0.8);opacity:0;}
-  to{transform:scale(1);opacity:1;}
+.heart{
+  font-size:50px;
+  animation:beat 1s infinite;
 }
 
 @keyframes fade{
@@ -76,26 +69,71 @@ button:hover{
   0%,100%{transform:scale(1);}
   50%{transform:scale(1.3);}
 }
+
+.snow{
+  position:fixed;
+  top:-10px;
+  color:white;
+  animation:fall linear infinite;
+}
+@keyframes fall{
+  to{transform:translateY(110vh);}
+}
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h1>Merry Christmas 🎄</h1>
-  <div class="heart">❤️</div>
+<!-- PAGE 1 -->
+<div class="page active" id="page1">
+  <div class="card">
+    <h1>🎄 Merry Christmas 🎄</h1>
+    <p>Someone special has something for you…</p>
+    <button onclick="nextPage(2)">Tap to Continue 🎁</button>
+  </div>
+</div>
 
-  <button onclick="showSurprise()">Tap to Surprise 🎁</button>
+<!-- PAGE 2 -->
+<div class="page" id="page2">
+  <div class="card">
+    <h2>💖 A Small Message</h2>
+    <p>
+      Every smile of yours,<br>
+      every moment with you,<br>
+      is my favorite memory.
+    </p>
+    <button onclick="nextPage(3)">One Last Surprise ❤️</button>
+  </div>
+</div>
 
-  <div id="surprise">
+<!-- PAGE 3 -->
+<div class="page" id="page3">
+  <div class="card">
+    <div class="heart">❤️</div>
     <h2>Shilpa ❤️ Bishal</h2>
-    <p>You are my forever Christmas 💖</p>
+    <p>
+      You are my today,<br>
+      my tomorrow,<br>
+      my forever Christmas 🎄
+    </p>
   </div>
 </div>
 
 <script>
-function showSurprise(){
-  document.getElementById("surprise").style.display = "block";
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+}
+
+// Snowfall
+for(let i=0;i<30;i++){
+  let snow=document.createElement("div");
+  snow.className="snow";
+  snow.innerHTML="❄";
+  snow.style.left=Math.random()*100+"vw";
+  snow.style.animationDuration=3+Math.random()*5+"s";
+  snow.style.fontSize=10+Math.random()*20+"px";
+  document.body.appendChild(snow);
 }
 </script>
 
