@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Merry Christmas My Love</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap');
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
+  height:100vh;
+  background: linear-gradient(135deg,#b31217,#e52d27);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:white;
+  text-align:center;
+}
+
+.container{
+  animation: fadeIn 2s ease;
+}
+
+h1{
+  font-size:2.8rem;
+  animation: glow 2s infinite alternate;
+}
+
+h2{
+  margin-top:10px;
+  font-size:1.6rem;
+}
+
+p{
+  margin-top:20px;
+  font-size:1rem;
+  opacity:0.9;
+}
+
+button{
+  margin-top:30px;
+  padding:12px 30px;
+  border:none;
+  border-radius:30px;
+  font-size:1rem;
+  background:white;
+  color:#b31217;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.1);
+}
+
+.heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  animation: float 6s linear infinite;
+  opacity:0.8;
+}
+
+@keyframes float{
+  0%{transform:translateY(0);opacity:1;}
+  100%{transform:translateY(-100vh);opacity:0;}
+}
+
+@keyframes glow{
+  from{text-shadow:0 0 10px #fff;}
+  to{text-shadow:0 0 25px #ffd700;}
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.8);}
+  to{opacity:1;transform:scale(1);}
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🎄 Merry Christmas 🎄</h1>
+  <h2>Shilpa ❤️ Bishal</h2>
+  <p>
+    You are my favorite gift, my happiness,  
+    and my forever.  
+  </p>
+
+  <button onclick="playMusic()">Tap for Surprise 🎁</button>
+</div>
+
+<!-- Background Music -->
+<audio id="bgm" loop>
+  <source src="bgm.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function playMusic(){
+  document.getElementById("bgm").play();
+}
+
+// Floating hearts
+setInterval(()=>{
+  let heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="❤️";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(15+Math.random()*20)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),6000);
+},300);
+</script>
+
+</body>
+</html>
